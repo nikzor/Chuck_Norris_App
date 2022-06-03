@@ -37,7 +37,7 @@ class _TinderWidgetState extends State<TinderWidget> {
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.orange[200],
       appBar: AppBar(
-        leading: BackButton(),
+        leading: const BackButton(),
         title: const Text('What about good joke?'),
         centerTitle: true,
         elevation: 0,

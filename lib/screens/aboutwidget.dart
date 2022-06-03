@@ -42,7 +42,7 @@ class AboutWidget extends StatelessWidget {
                           TypewriterAnimatedText('My name is Nikita'),
                           TypewriterAnimatedText(
                               'This is my first Flutter application'),
-                          TypewriterAnimatedText('Where is my applouses?'),
+                          TypewriterAnimatedText('Where is my applause?'),
                           TypewriterAnimatedText('You should go back home!'),
                           TypewriterAnimatedText('Loading...'),
                         ],
