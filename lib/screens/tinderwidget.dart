@@ -50,24 +50,6 @@ class _TinderWidgetState extends State<TinderWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GestureDetector(
-                // onPanUpdate: (details) {
-                //   // Swiping in right direction.
-                //   if (details.delta.dx > 0) {
-                //     setState(() {
-                //       // Toggle light when tapped.
-                //       _getJoke();
-                //     });
-                //   }
-
-                //   // Swiping in left direction.
-                //   if (details.delta.dx < 0) {
-                //     showDialog(
-                //       context: context,
-                //       builder: (BuildContext context) =>
-                //           _buildPopupDialog(context),
-                //     );
-                //   }
-                // },
                 onHorizontalDragEnd: (DragEndDetails details) {
                   if (details.primaryVelocity! < 0) {
                     showDialog(
@@ -81,7 +63,6 @@ class _TinderWidgetState extends State<TinderWidget> {
                     });
                   }
                 },
-
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white30,
