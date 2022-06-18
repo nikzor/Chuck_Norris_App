@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -18,16 +20,51 @@ class _HomeWidgetState extends State<HomeWidget> {
     ]);
   }
 
+  bool _isEnglish = true;
+  String _actualLang = 'EN';
+
+  void _setLang() async {
+    if (_isEnglish) {
+      setState(() {
+        _isEnglish = false;
+        _actualLang = 'RU';
+      });
+      await context.setLocale(const Locale('ru'));
+    } else {
+      setState(() {
+        _isEnglish = true;
+        _actualLang = 'EN';
+      });
+      await context.setLocale(const Locale('en'));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange[200],
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, '/about');
-        },
+      floatingActionButton: SpeedDial(
+        animatedIcon: AnimatedIcons.menu_close,
         backgroundColor: Colors.orange[500],
-        child: const Icon(Icons.help),
+        overlayColor: Colors.transparent,
+        overlayOpacity: 0.2,
+        children: [
+          SpeedDialChild(
+            child: const Icon(Icons.favorite),
+            label: 'favourite'.tr(),
+            onTap: () => Navigator.pushNamed(context, '/favourite'),
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.help),
+            label: 'about'.tr(),
+            onTap: () => Navigator.pushNamed(context, '/about'),
+          ),
+          SpeedDialChild(
+            child: const Icon(Icons.emoji_flags),
+            label: _actualLang,
+            onTap: () => _setLang(),
+          )
+        ],
       ),
       body: SafeArea(
         child: Center(
@@ -50,9 +87,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                     },
                     minWidth: 200.0,
                     height: 42.0,
-                    child: const Text(
-                      "Let's start dating!",
-                      style: TextStyle(
+                    child: Text(
+                      "start".tr(),
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
