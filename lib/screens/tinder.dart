@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 
-
 class Tinder extends StatefulWidget {
   const Tinder({Key? key}) : super(key: key);
 
@@ -15,7 +14,6 @@ class Tinder extends StatefulWidget {
 }
 
 class _TinderState extends State<Tinder> {
-
   String joke = "Not actually a joke";
   String numOfChuck = "1";
   late Response response;
@@ -55,7 +53,6 @@ class _TinderState extends State<Tinder> {
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
-        // backgroundColor: Colors.orange[500],
       ),
       body: SafeArea(
         child: Center(
@@ -142,7 +139,12 @@ class _TinderState extends State<Tinder> {
                       icon: const Icon(Icons.thumb_down),
                     ),
                     IconButton(
-                      onPressed: _like,
+                      onPressed: () {
+                        _like;
+                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: const Text('tinder_like').tr()));
+                      },
                       icon: const Icon(Icons.favorite_border),
                     ),
                     IconButton(
