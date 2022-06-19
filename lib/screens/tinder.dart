@@ -1,30 +1,43 @@
+import 'dart:convert';
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 
-class Joke {
-  final String value;
 
-  const Joke({
-    required this.value,
-  });
-}
-
-class TinderWidget extends StatefulWidget {
-  const TinderWidget({Key? key}) : super(key: key);
+class Tinder extends StatefulWidget {
+  const Tinder({Key? key}) : super(key: key);
 
   @override
-  State<TinderWidget> createState() => _TinderWidgetState();
+  State<Tinder> createState() => _TinderState();
 }
 
-class _TinderWidgetState extends State<TinderWidget> {
+class _TinderState extends State<Tinder> {
+
   String joke = "Not actually a joke";
   String numOfChuck = "1";
+  late Response response;
+
   Random random = Random();
+  final CollectionReference _jokes =
+      FirebaseFirestore.instance.collection('favourite');
+  @override
+  void initState() {
+    _getJoke();
+    super.initState();
+  }
+
+  void _like() async {
+    String jsonStr = response.toString();
+    Map<String, dynamic> d = json.decode(jsonStr.trim());
+    await _jokes.add(d);
+  }
+
   void _getJoke() async {
     Dio dio = Dio();
-    Response response =
-        await dio.get("https://api.chucknorris.io/jokes/random");
+    response = await dio.get("https://api.chucknorris.io/jokes/random");
     setState(() {
       joke = response.data['value'];
       numOfChuck = (random.nextInt(8) + 1).toString();
@@ -38,7 +51,7 @@ class _TinderWidgetState extends State<TinderWidget> {
       backgroundColor: Colors.orange[200],
       appBar: AppBar(
         leading: const BackButton(),
-        title: const Text('What about good joke?'),
+        title: Text('tinder_appbar'.tr()),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -129,6 +142,10 @@ class _TinderWidgetState extends State<TinderWidget> {
                       icon: const Icon(Icons.thumb_down),
                     ),
                     IconButton(
+                      onPressed: _like,
+                      icon: const Icon(Icons.favorite_border),
+                    ),
+                    IconButton(
                       onPressed: _getJoke,
                       icon: const Icon(Icons.thumb_up),
                     ),
@@ -145,12 +162,12 @@ class _TinderWidgetState extends State<TinderWidget> {
 
 Widget _buildPopupDialog(BuildContext context) {
   return AlertDialog(
-    title: const Text('Oh man, you made a mistake!'),
+    title: Text('mistake_header'.tr()),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: const [
-        Text("Nobody can dislike CHUCK!!!"),
+      children: [
+        Text('mistake_text'.tr()),
       ],
     ),
     actions: <Widget>[
@@ -159,7 +176,7 @@ Widget _buildPopupDialog(BuildContext context) {
           Navigator.of(context).pop();
         },
         textColor: Theme.of(context).primaryColor,
-        child: const Text('Close'),
+        child: Text('close_mistake'.tr()),
       ),
     ],
   );

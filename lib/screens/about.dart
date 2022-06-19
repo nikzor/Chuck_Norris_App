@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
@@ -6,11 +7,8 @@ class AboutWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.orange[200],
-        appBar: null,
         body: SafeArea(
           child: Center(
             child: Column(
@@ -38,13 +36,12 @@ class AboutWidget extends StatelessWidget {
                       ),
                       child: AnimatedTextKit(
                         animatedTexts: [
-                          TypewriterAnimatedText('Hello'),
-                          TypewriterAnimatedText('My name is Nikita'),
-                          TypewriterAnimatedText(
-                              'This is my first Flutter application'),
-                          TypewriterAnimatedText('Where is my applause?'),
-                          TypewriterAnimatedText('You should go back home!'),
-                          TypewriterAnimatedText('Loading...'),
+                          TypewriterAnimatedText('text_1'.tr()),
+                          TypewriterAnimatedText('text_2'.tr()),
+                          TypewriterAnimatedText('text_3'.tr()),
+                          TypewriterAnimatedText('text_4'.tr()),
+                          TypewriterAnimatedText('text_5'.tr()),
+                          TypewriterAnimatedText('text_6'.tr()),
                         ],
                         onFinished: () {
                           Navigator.pushNamed(context, '/');
@@ -59,7 +56,6 @@ class AboutWidget extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }
