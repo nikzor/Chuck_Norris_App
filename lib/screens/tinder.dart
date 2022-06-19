@@ -30,6 +30,9 @@ class _TinderState extends State<Tinder> {
   void _like() async {
     String jsonStr = response.toString();
     Map<String, dynamic> d = json.decode(jsonStr.trim());
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: const Text('tinder_like').tr()));
     await _jokes.add(d);
   }
 
@@ -139,12 +142,11 @@ class _TinderState extends State<Tinder> {
                       icon: const Icon(Icons.thumb_down),
                     ),
                     IconButton(
-                      onPressed: () {
-                        _like;
-                        ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: const Text('tinder_like').tr()));
-                      },
+                      onPressed: _like,
+                      // {
+                      //   _like;
+                      //
+                      // },
                       icon: const Icon(Icons.favorite_border),
                     ),
                     IconButton(
