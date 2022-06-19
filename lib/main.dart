@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         '/': (_) => const HomeWidget(),
         '/tinder': (_) => const Tinder(),
         '/about': (_) => const AboutWidget(),
-        '/favourite': (_) => Favourite(),
+        '/favourite': (_) => const Favourite(),
       },
     );
   }
