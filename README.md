@@ -12,7 +12,7 @@ Even if you don't know English, you can navigate through app with Russian Locali
 Application use Firebase services: Firestore to keep favourite joke and Crashlytics to save info about unhandled exceptions \
 Apparently, this is my first Flutter app 
 
-### Link to the .apk file : [here](build\app\outputs\flutter-apk\app-release.apk)
+### Link to the .apk file : [here](app-release.apk)
 ___
 
 ## How does it works?
