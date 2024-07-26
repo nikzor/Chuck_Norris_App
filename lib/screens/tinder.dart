@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:math';
 
 class Tinder extends StatefulWidget {
-  const Tinder({Key? key}) : super(key: key);
+  const Tinder({super.key});
 
   @override
   State<Tinder> createState() => _TinderState();
@@ -143,10 +143,6 @@ class _TinderState extends State<Tinder> {
                     ),
                     IconButton(
                       onPressed: _like,
-                      // {
-                      //   _like;
-                      //
-                      // },
                       icon: const Icon(Icons.favorite_border),
                     ),
                     IconButton(

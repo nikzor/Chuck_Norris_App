@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Favourite extends StatefulWidget {
-  const Favourite({Key? key}) : super(key: key);
+  const Favourite({super.key});
 
   @override
   State<Favourite> createState() => _FavouriteState();
@@ -49,17 +49,17 @@ class _FavouriteState extends State<Favourite> {
                   onDismissed: (direction) {
                     _removeJoke(documentSnapshot.id);
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: const Text('delete').tr()));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: const Text('delete').tr()));
                   },
                   child: Card(
                     elevation: 6,
                     margin: const EdgeInsets.all(10),
                     child: ListTile(
-
                       title: Text(
                         (data['value']),
-                        style: const TextStyle(fontSize: 16, color: Colors.black),
+                        style:
+                            const TextStyle(fontSize: 16, color: Colors.black),
                         textAlign: TextAlign.center,
                       ),
                     ),
